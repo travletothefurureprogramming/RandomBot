@@ -90,6 +90,23 @@ app.command("/randombot-clear", async ({ ack, respond}) => {
 
 });
 
+app.command("/randombot-info", async ({ ack, respond}) => {
+    await ack();
+
+    await respond(`
+        RandomBot
+
+        RandomBot is a simple Slack bot that manages a list of people and can randomly pick someone from it.
+
+        You can add people, view the list, randomly pick a person, clear the list, and see all available commands directly from Slack.
+
+        The bot is built with JavaScript, Node.js, Slack Bolt and Socket Mode. The list is saved locally in a JSON file so it can stay between restarts.
+    `);
+
+});
+
+
+
 (async () => {
   await app.start();
   console.log("bot is running!");
