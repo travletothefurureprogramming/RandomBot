@@ -27,26 +27,43 @@ app.command("/randombot-help", async ({ ack, respond }) => {
 
 app.command("/randombot-add", async ({ command, ack, respond }) => {
   await ack();
+  const name = command.text.trim();
 
   const people = JSON.parse(fs.readFileSync("people.json"));
+  
+  if (name.length === 0) {
+    await respond("The name can not be empty!");
+    return;
+  }
 
-  people.push(command.text);
+  if (people.includes(name)) {
+    await respond(`The name ${name} is already in the list!`);
+    return;
+  }
+
+  people.push(name);
 
   fs.writeFileSync("people.json", JSON.stringify(people, null, 2));
 
-  await respond(`Added ${command.text} to the list!`);
+  await respond(`Added ${name} to the list!`);
 });
 
 
-app.command("/randombot-list", async ({ command, ack, respond }) => {
+app.command("/randombot-list", async ({ ack, respond }) => {
   await ack();
 
   const people = JSON.parse(fs.readFileSync("people.json"));
+  
   if (people.length === 0) {
-    await respond("The list is empty!")
+    await respond("The list is empty!");
     return;
   }
-  await respond(`The folowing people is on the list: ${people}`);
+
+  const list = people
+    .map((person, index) => `${index + 1}. ${person}`)
+    .join("\n");
+
+  await respond(`People in the list:\n\n${list}\n\nTotal: ${people.length} people`);
 });
 
 app.command("/randombot-pick", async ({ ack, respond }) => {
