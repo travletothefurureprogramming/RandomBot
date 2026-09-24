@@ -42,7 +42,10 @@ app.command("/randombot-list", async ({ command, ack, respond }) => {
   await ack();
 
   const people = JSON.parse(fs.readFileSync("people.json"));
-
+  if (people.length === 0) {
+    await respond("The list is empty!")
+    return;
+  }
   await respond(`The folowing people is on the list: ${people}`);
 });
 
