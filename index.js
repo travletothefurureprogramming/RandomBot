@@ -61,6 +61,15 @@ app.command("/randombot-pick", async ({ ack, respond }) => {
   await respond(`I picked: ${randomPerson}`);
 });
 
+app.command("/randombot-clear", async ({ ack, respond}) => {
+    await ack();
+
+    fs.writeFileSync("people.json", "[]");
+
+    await respond("The list has cleared succesfully!");
+
+});
+
 (async () => {
   await app.start();
   console.log("bot is running!");
