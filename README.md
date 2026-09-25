@@ -1,5 +1,7 @@
 # RandomBot
 
+![Node.js](https://img.shields.io/badge/Node.js-v18%2B-green?style=flat-square) ![Slack Bolt](<https://img.shields.io/badge/Slack-Bolt%20JS-4A154B?style=flat-square>) ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
+
 A lightweight Slack bot for managing a team list and picking people at random. Built with Node.js, `@slack/bolt`, and Socket Mode. Uses a local JSON file for data persistence.
 
 ## Features
@@ -24,7 +26,6 @@ Invite the bot to any channel:
 * /randombot-list - Show current list
 * /randombot-clear - Clear the list
 * /randombot-help - Show available commands
-
 
 ## License
 
